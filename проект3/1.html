@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукт</title>
+    <style>
+        /* Стилі можна розмістити тут або у окремому CSS файлі */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            /* Світло-сірий фон */
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #ff7043;
+            /* Помаранчевий колір */
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #ffce40 3px solid;
+            /* Жовтий колір */
+            display: flex;
+            /* Flex контейнер для вирівнювання елементів */
+            justify-content: space-between;
+            /* Вирівнювання елементів горизонтально */
+            align-items: center;
+            /* Вирівнювання елементів вертикально */
+        }
+
+        header h1 {
+            margin: 0;
+            padding-left: 20px;
+            display: flex;
+            /* Flex контейнер для вирівнювання елементів */
+            align-items: center;
+            /* Вирівнювання елементів вертикально */
+        }
+
+        header h1 img {
+            width: 40px;
+            /* Налаштування розміру зображення Меркурій */
+            margin-right: 10px;
+            /* Додати трохи простору між назвою магазину та зображенням */
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .product-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            /* Білий фон */
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            float: left;
+            width: 50%;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-details {
+            float: left;
+            width: 50%;
+            padding: 20px;
+        }
+
+        .product-details h2 {
+            margin-top: 0;
+            color: #ff5722;
+            /* Червоний колір */
+        }
+
+        .product-details p {
+            margin-top: 10px;
+            color: #333;
+            /* Темно-сірий колір */
+        }
+
+        button {
+            background-color: #ff9800;
+            /* Помаранчевий колір */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff5722;
+            /* Червоний колір */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <img src="меркурій.png" alt="Mercury">
+                Наш Інтернет-магазин
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Головна</a></li>
+                    <li><a href="#">Каталог</a></li>
+                    <li><a href="#">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container" id="catalog">
+        <!-- Каталог буде динамічно створюватися тут -->
+    </div>
+
+    <script>
+        window.onload = function () {
+            renderCatalog();
+
+            // Отримуємо посилання на кнопку "Каталог"
+            var catalogButton = document.querySelector('nav ul li:nth-child(2) a');
+
+            // Додаємо обробник події для кнопки "Каталог"
+            catalogButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Відмінюємо стандартну дію кнопки
+
+                // Перенаправляємо користувача на інший сайт
+                redirectToOtherSite();
+            });
+        };
+
+        // Функція для переадресації на інший сайт
+        function redirectToOtherSite() {
+            var otherSiteURL = "https://www.example.com"; // Замініть це на URL іншого сайту
+            window.location.href = otherSiteURL;
+        }
+
+        // Визначення даних продукту
+        var products = [
+            {
+                name: "Назва товару 1",
+                price: "$50",
+                description: "Опис товару 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                imageURL: "https://noosfera.biz/files/shop_products/803/img/m-volodarka-ozera.jpg",
+                link: "https://example.com/product1" // Додайте посилання для кожного продукту
+            },
+            {
+                name: "Назва товару 2",
+                price: "$60",
+                description: "Опис товару 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                imageURL: "https://api.worldofcomics.ua/file-manager-thumb/11174/984411-564x564.webp",
+                link: "https://example.com/product2"
+            },
+            {
+                name: "Назва товару 3",
+                price: "$70",
+                description: "Опис товару 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                imageURL: "https://book-ye.com.ua/upload/resize_cache/iblock/7d5/520_860_1/be60aa09_7706_11ee_818c_00505684ea69_cb079956_770b_11ee_818c_00505684ea69.jpg",
+                link: "https://example.com/product3"
+            },
+            // Додавайте більше продуктів тут, якщо потрібно
+        ];
+
+        // Функція для генерації HTML для кожного продукту
+        function generateProductHTML(product) {
+            return `
+                <div class="product-container">
+                    <div class="product-image">
+                        <img src="${product.imageURL}" alt="${product.name}" style="max-width: 70%; height: auto;">
+                    </div>
+                    <div class="product-details">
+                        <h2>${product.name}</h2>
+                        <p>Ціна: ${product.price}</p>
+                        <p>${product.description}</p>
+                        <button onclick="redirectTo('${product.link}')">Додати до кошика</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Функція для відображення продуктів у каталозі
+        function renderCatalog() {
+            var catalogContainer = document.getElementById("catalog");
+            var html = "";
+            products.forEach(function (product) {
+                html += generateProductHTML(product);
+            });
+            catalogContainer.innerHTML = html;
+        }
+    </script>
+
+</body>
+
+</html>
